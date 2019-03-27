@@ -22,13 +22,13 @@ class TableViewController: UITableViewController {
     // MARK: UITableViewController
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return appDelegate().memes.count
+        return MemeStore.shared.memes.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "Cell")!
-        let meme = appDelegate().memes[(indexPath as NSIndexPath).row]
+        let meme = MemeStore.shared.memes[(indexPath as NSIndexPath).row]
         cell.textLabel!.text = meme.bottomText + meme.topText
         cell.imageView!.image = meme.memedImage
         
@@ -37,7 +37,7 @@ class TableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let selectedMeme = appDelegate().memes[(indexPath as NSIndexPath).row]
+        let selectedMeme = MemeStore.shared.memes[(indexPath as NSIndexPath).row]
         let controller = self.storyboard!.instantiateViewController(withIdentifier: "MemeDetailViewController") as! MemeDetailViewController
         controller.meme = selectedMeme
         self.navigationController!.pushViewController(controller, animated: true)
