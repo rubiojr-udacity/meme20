@@ -21,16 +21,11 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     var viewPos: CGFloat = 0
     
     @IBAction func pickImage(_ sender: Any) {
-        let pickerController = UIImagePickerController()
-        pickerController.delegate = self
-        present(pickerController, animated: true, completion: nil)
+        pickImageFrom(.photoLibrary)
     }
     
     @IBAction func pickFromCamera(_ sender: Any) {
-        let pickerController = UIImagePickerController()
-        pickerController.delegate = self
-        pickerController.sourceType = .camera
-        present(pickerController, animated: true, completion: nil)
+        pickImageFrom(.camera)
     }
     
     @IBAction func shareMeme(_ sender: Any) {
@@ -138,5 +133,13 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         toolbar.isHidden = !toolbar.isHidden
         navToolbar.isHidden = !navToolbar.isHidden
     }
+
+    func pickImageFrom(_ type: UIImagePickerController.SourceType) {
+        let pickerController = UIImagePickerController()
+        pickerController.delegate = self
+        pickerController.sourceType = type
+        present(pickerController, animated: true, completion: nil)
+    }
+
 }
 
