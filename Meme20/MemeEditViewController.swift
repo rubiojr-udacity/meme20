@@ -20,6 +20,13 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     
     var viewPos: CGFloat = 0
     
+    var memeTextAttributes: [NSAttributedString.Key: Any] = [
+        NSAttributedString.Key.strokeColor: UIColor.black,
+        NSAttributedString.Key.foregroundColor: UIColor.white,
+        NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+        NSAttributedString.Key.strokeWidth: -4.5
+    ]
+
     @IBAction func pickImage(_ sender: Any) {
         pickImageFrom(.photoLibrary)
     }
@@ -46,7 +53,11 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        let centerText = NSMutableParagraphStyle()
+        centerText.alignment = NSTextAlignment.center
+        memeTextAttributes[NSAttributedString.Key.paragraphStyle] = centerText
+        topText.defaultTextAttributes = memeTextAttributes
+        bottomText.defaultTextAttributes = memeTextAttributes
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
         bottomText.delegate = self
         topText.delegate = self
